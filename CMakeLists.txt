@@ -1,3 +1,9 @@
+cmake_minimum_required(VERSION 3.13)
+
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # == DO NOT EDIT THE FOLLOWING LINES for the Raspberry Pi Pico VS Code Extension to work ==
 if(WIN32)
     set(USERHOME $ENV{USERPROFILE})
@@ -14,16 +20,11 @@ endif()
 # ====================================================================================
 set(PICO_BOARD pico CACHE STRING "Board type")
 
-# Set minimum required version of CMake
-cmake_minimum_required(VERSION 3.12)
-
-# Include build functions from Pico SDK
-include($ENV{PICO_SDK_PATH}/external/pico_sdk_import.cmake)
+# Pull in Raspberry Pi Pico SDK (must be before project)
+include(pico_sdk_import.cmake)
 
 # Set name of project (as PROJECT_NAME) and C/C++ standards
 project(mcp4725 C CXX ASM)
-set(CMAKE_C_STANDARD 11)
-set(CMAKE_CXX_STANDARD 20)
 
 # Creates a pico-sdk subdirectory in our project for the libraries
 pico_sdk_init()
@@ -33,7 +34,8 @@ add_compile_options(-Wall -Wextra)
 
 # Tell CMake where to find the executable source file
 add_executable(${PROJECT_NAME} 
-  examples/isConnected/main.cpp
+  #examples/isConnected/main.cpp
+  examples/codePracticeOscillator/main.cpp
   #examples/demoTest/main.cpp
   #examples/setVoltage/main.cpp
   #examples/squareWave/main.cpp
