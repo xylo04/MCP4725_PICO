@@ -10,7 +10,6 @@
 #include "mcp4725/mcp4725.hpp"
 #include "mcp4725/mcp4725_Sinewave_Data.hpp" // Sine wave data structure's
 #include "pico/stdlib.h"
-#include <stdio.h>
 
 #define DAC_I2C_ADDRESS myDAC.MCP4725A0_Addr_A00 // MCP4725 I2C address
 #define DAC_REF_VOLTAGE 3.3   // Volts DAC supply-reference voltage
@@ -28,14 +27,9 @@ uint32_t periodUs = 1000000 / sineWaveFrequency; // Period in microseconds
 MCP4725_PICO myDAC(DAC_REF_VOLTAGE);
 
 int main() {
-  busy_wait_ms(500);
-  stdio_init_all();
-  busy_wait_ms(1000);
-  printf("MCP4725_PICO : Code Practice Oscillator\r\n");
 
   if (!myDAC.begin(DAC_I2C_ADDRESS, I2C_BLOCK, I2C_SPEED, I2C_SDA_PIN,
                    I2C_SCL_PIN, I2C_TIMEOUT)) {
-    printf("MCP4725 : Failed to initialize DAC.!\r\n");
     while (1) {
     };
   }
